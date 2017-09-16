@@ -10,7 +10,7 @@ import {
   ARTICLE_DELETE
 } from '../../shared/routes.js'
 
-const router = express.router()
+const router = express.Router()
 
 router.route(ARTICLE_INDEX).get((req, res, next) => {
   Article
@@ -20,3 +20,80 @@ router.route(ARTICLE_INDEX).get((req, res, next) => {
     })
     .catch(next)
 })
+
+router.route(ARTICLE_SHOW).get((req, res, next) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.sendStatus(404)
+    return
+  }
+
+  Article
+    .findById(id)
+    .then((article) => {
+      if (article) {
+        res.json(article)
+        return
+      }
+      res.sendStatus(404)
+    })
+    .catch(next)
+})
+
+router.post(ARTICLE_CREATE, (req, res, next) => {
+  const article = new Booking(Object.assign({}, req.body))
+
+  article
+    .save()
+    .then((newArticle) => {
+      res.status(201).json(newArticle)
+    })
+    .catch(next)
+})
+
+router.route(ARTICLE_UPDATE).put((req, res, next) => {
+  const { id } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.sendStatus(404)
+    return
+  }
+
+  Article
+    .findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true },
+    )
+    .then((article) => {
+      if (article) {
+        res.json(article)
+        return
+      }
+      res.sendStatus(404)
+    })
+    .catch(next)
+})
+router.route(ARTICLE_DELETE).delete((req, res, next) => {
+  const { id } = req.params
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.sendStatus(404)
+    return
+  }
+
+  Article
+    .findById(id)
+    .then((article) => {
+      if (article) {
+        article.remove()
+        .then((deletedArticle) => {
+          res.json(deletedArticle)
+        })
+        return
+      }
+      res.sendStatus(404)
+    })
+    .catch(next)
+})
+
+export default router
