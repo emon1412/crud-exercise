@@ -32,8 +32,8 @@ app.get('/article', (req, res) => {
 
 app.post('/article', (req, res) => {
   const article = new Article({
-      title: 'example title',
-      body: 'example body'
+    title: 'example title',
+    body: 'example body'
   })
   article
     .save()

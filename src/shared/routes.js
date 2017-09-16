@@ -1,0 +1,5 @@
+export const ARTICLE_INDEX = '/article'
+export const ARTICLE_SHOW = '/article/:id'
+export const ARTICLE_CREATE = '/article'
+export const ARTICLE_UPDATE = '/article/:id'
+export const ARTICLE_DELETE = '/article/:id'
