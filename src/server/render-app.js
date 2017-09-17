@@ -5,10 +5,10 @@ const renderApp = (title) =>
 <html>
   <head>
     <title>${title}</title>
-    <link rel="stylesheet" href="${STATIC_PATH}/css/style.css">
   </head>
   <body>
-    <h1>${title}</h1>
+    <div id="app"></div>
+    <script src="http://localhost:8000${STATIC_PATH}/index.js"></script>
   </body>
 </html>
 `

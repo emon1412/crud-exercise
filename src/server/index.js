@@ -15,39 +15,14 @@ const app = express()
 app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(STATIC_PATH, express.static('dist'))
-app.use(STATIC_PATH, express.static('public'))
+
+app.use(STATIC_PATH, express.static('src/client'))
 
 app.get('/', (req, res) => {
   res.send(renderApp(APP_NAME))
 })
 
 app.use('/api', articleRoute)
-
-// app.get('/article', (req, res) => {
-//   Article
-//     .find({})
-//     .then(item => {
-//       console.log(item)
-//     })
-//   // res.send('here')
-// })
-//
-// app.post('/article', (req, res) => {
-//   const article = new Article({
-//     title: 'example title 5',
-//     body: 'example body'
-//   })
-//   article
-//     .save()
-//     .then(item => {
-//       // console.log(item)
-//       console.log('@@@@@@@@@@@@@@@@@@@@@@@@\n', req.body)
-//     })
-//     .catch(error => console.log(error))
-//   // res.send('here')
-// })
-
 
 
 app.listen(WEB_PORT, () => {
