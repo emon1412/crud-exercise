@@ -16,7 +16,7 @@ app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
-app.use(STATIC_PATH, express.static('src/client'))
+app.use(STATIC_PATH, express.static('dist'))
 
 app.get('/', (req, res) => {
   res.send(renderApp(APP_NAME))
@@ -26,5 +26,5 @@ app.use('/api', articleRoute)
 
 
 app.listen(WEB_PORT, () => {
-  console.log(`Server running on port ${WEB_PORT} ${isProd ? '(production)' : '(development)'}.`)
+  console.log(`Server running on port ${WEB_PORT}.\nKeep "yarn wds" running in an other terminal`)
 })

@@ -1,4 +1,4 @@
-import { STATIC_PATH } from '../shared/config'
+import { STATIC_PATH, WDS_PORT } from '../shared/config'
 
 const renderApp = (title) =>
 `<!doctype html>
@@ -8,7 +8,7 @@ const renderApp = (title) =>
   </head>
   <body>
     <div id="app"></div>
-    <script src="http://localhost:8000${STATIC_PATH}/index.js"></script>
+    <script src="http://localhost:${WDS_PORT}/dist/bundle.js"></script>
   </body>
 </html>
 `
