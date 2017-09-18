@@ -16,7 +16,19 @@ router.route(ARTICLE_INDEX).get((req, res, next) => {
   Article
     .find({})
     .then((articles) => {
-      res.json(articles)
+      const { title } = req.query
+      const results = []
+      if (title) {
+        articles.forEach(item => {
+          if (item.title.includes(title)) {
+            results.push(item)
+          }
+        })
+        res.status(201).json(results)
+      }
+      else {
+        res.status(201).json(articles)
+      }
     })
     .catch(next)
 })
@@ -41,7 +53,7 @@ router.route(ARTICLE_SHOW).get((req, res, next) => {
 })
 
 router.post(ARTICLE_CREATE, (req, res, next) => {
-  const article = new Booking(Object.assign({}, req.body))
+  const article = new Article(Object.assign({}, req.body))
 
   article
     .save()

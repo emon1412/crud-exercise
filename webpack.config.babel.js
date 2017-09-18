@@ -1,4 +1,5 @@
 import path from 'path'
+import webpack from 'webpack'
 
 import { WDS_PORT } from './src/shared/config'
 
@@ -15,11 +16,14 @@ export default {
     rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
     ],
+    loaders: [
+       { test: /\.css$/, loader: 'style-loader!css-loader' },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.css'],
   },
   devServer: {
     port: WDS_PORT,
-  },
+  }
 }
